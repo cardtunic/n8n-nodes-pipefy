@@ -1,12 +1,13 @@
 import { INodeProperties } from 'n8n-workflow';
 
 import * as create from './create.operation';
+import * as destroy from './destroy.operation';
 import * as get from './get.operation';
 import * as move from './move.operation';
 import * as update from './update.operation';
 import * as updateFields from './updateFields.operation';
 
-export { create, get, move, update, updateFields };
+export { create, destroy, get, move, update, updateFields };
 
 export const description: INodeProperties[] = [
 	{
@@ -51,6 +52,12 @@ export const description: INodeProperties[] = [
 				action: 'Update card fields',
 				description: 'Updates the fields of a given card',
 			},
+			{
+				name: 'Delete',
+				value: 'destroy',
+				action: 'Delete card',
+				description: 'Deletes a given card',
+			},
 		],
 		default: 'get',
 		displayOptions: {
@@ -65,4 +72,5 @@ export const description: INodeProperties[] = [
 	...create.description,
 	...update.description,
 	...updateFields.description,
+	...destroy.description,
 ];
