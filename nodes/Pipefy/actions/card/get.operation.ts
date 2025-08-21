@@ -231,12 +231,15 @@ const queryParts: Record<OptionalQueryPart, string> = {
   `,
 };
 
-export async function execute(this: IExecuteFunctions): Promise<INodeExecutionData[]> {
-	const cardId = this.getNodeParameter('cardId', 0) as string;
+export async function execute(
+	this: IExecuteFunctions,
+	itemIndex: number,
+): Promise<INodeExecutionData> {
+	const cardId = this.getNodeParameter('cardId', itemIndex) as string;
 
 	const optionalQueryPart = optionalQueryParts
 		.map((part) => {
-			const isPartEnabled = (this.getNodeParameter(part, 0) as boolean) === true;
+			const isPartEnabled = (this.getNodeParameter(part, itemIndex) as boolean) === true;
 
 			if (isPartEnabled) return queryParts[part];
 
@@ -305,5 +308,5 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
 		variables: { cardId },
 	});
 
-	return this.helpers.returnJsonArray(responseData);
+	return { json: responseData };
 }

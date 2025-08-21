@@ -41,9 +41,12 @@ const displayOptions: IDisplayOptions = {
 
 export const description = updateDisplayOptions(displayOptions, properties);
 
-export async function execute(this: IExecuteFunctions): Promise<INodeExecutionData[]> {
-	const presignedUrl = this.getNodeParameter('presignedUrl', 0) as string;
-	const binaryFieldName = this.getNodeParameter('binaryFieldName', 0) as string;
+export async function execute(
+	this: IExecuteFunctions,
+	itemIndex: number,
+): Promise<INodeExecutionData> {
+	const presignedUrl = this.getNodeParameter('presignedUrl', itemIndex) as string;
+	const binaryFieldName = this.getNodeParameter('binaryFieldName', itemIndex) as string;
 
 	const binaryDataInfo = this.helpers.assertBinaryData(0, binaryFieldName);
 	const binaryData = (await this.helpers.getBinaryDataBuffer(0, binaryFieldName)) as ArrayBuffer;
@@ -55,5 +58,5 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
 		mimeType: binaryDataInfo.mimeType,
 	});
 
-	return this.helpers.returnJsonArray({});
+	return { json: {} };
 }

@@ -56,9 +56,12 @@ const displayOptions: IDisplayOptions = {
 
 export const description = updateDisplayOptions(displayOptions, properties);
 
-export async function execute(this: IExecuteFunctions): Promise<INodeExecutionData[]> {
-	const cardId = this.getNodeParameter('cardId', 0) as string;
-	const phaseId = this.getNodeParameter('phaseId', 0) as string;
+export async function execute(
+	this: IExecuteFunctions,
+	itemIndex: number,
+): Promise<INodeExecutionData> {
+	const cardId = this.getNodeParameter('cardId', itemIndex) as string;
+	const phaseId = this.getNodeParameter('phaseId', itemIndex) as string;
 
 	const responseData = await graphQlRequest({
 		ctx: this,
@@ -73,5 +76,5 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
 		variables: { cardId, phaseId },
 	});
 
-	return this.helpers.returnJsonArray(responseData);
+	return { json: responseData };
 }

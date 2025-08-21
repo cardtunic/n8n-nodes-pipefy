@@ -19,7 +19,7 @@ export async function getOrgs(this: ILoadOptionsFunctions): Promise<INodePropert
 }
 
 export async function getOrgPipes(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-	const orgId = this.getNodeParameter('orgId', 0) as string;
+	const orgId = this.getNodeParameter('orgId') as string;
 
 	const {
 		organization: { pipes },
@@ -42,7 +42,7 @@ export async function getOrgPipes(this: ILoadOptionsFunctions): Promise<INodePro
 }
 
 export async function getPipePhases(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-	const cardId = this.getNodeParameter('cardId', 0) as string;
+	const cardId = this.getNodeParameter('cardId') as string;
 
 	const {
 		card: {
@@ -70,7 +70,7 @@ export async function getPipePhases(this: ILoadOptionsFunctions): Promise<INodeP
 export async function getCardPipeLabels(
 	this: ILoadOptionsFunctions,
 ): Promise<INodePropertyOptions[]> {
-	const cardId = this.getNodeParameter('cardId', 0) as string;
+	const cardId = this.getNodeParameter('cardId') as string;
 
 	const {
 		card: {
@@ -98,7 +98,7 @@ export async function getCardPipeLabels(
 export async function getCardPipeMembers(
 	this: ILoadOptionsFunctions,
 ): Promise<INodePropertyOptions[]> {
-	const cardId = this.getNodeParameter('cardId', 0) as string;
+	const cardId = this.getNodeParameter('cardId') as string;
 
 	const {
 		card: {
@@ -128,7 +128,7 @@ export async function getCardPipeMembers(
 export async function getCardPipeRelations(
 	this: ILoadOptionsFunctions,
 ): Promise<INodePropertyOptions[]> {
-	const cardId = this.getNodeParameter('cardId', 0) as string;
+	const cardId = this.getNodeParameter('cardId') as string;
 
 	const {
 		card: {
@@ -157,7 +157,7 @@ export async function getCardPipeRelations(
 export async function getPhaseRelationFields(
 	this: ILoadOptionsFunctions,
 ): Promise<INodePropertyOptions[]> {
-	const phaseId = this.getNodeParameter('phaseId', 0) as string;
+	const phaseId = this.getNodeParameter('phaseId') as string;
 
 	const {
 		phase: { fields },

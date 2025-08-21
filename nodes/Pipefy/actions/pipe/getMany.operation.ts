@@ -26,8 +26,11 @@ const displayOptions: IDisplayOptions = {
 
 export const description = updateDisplayOptions(displayOptions, properties);
 
-export async function execute(this: IExecuteFunctions): Promise<INodeExecutionData[]> {
-	const orgId = this.getNodeParameter('orgId', 0) as string;
+export async function execute(
+	this: IExecuteFunctions,
+	itemIndex: number,
+): Promise<INodeExecutionData> {
+	const orgId = this.getNodeParameter('orgId', itemIndex) as string;
 
 	const responseData = await graphQlRequest({
 		ctx: this,
@@ -43,5 +46,5 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
 		variables: { orgId },
 	});
 
-	return this.helpers.returnJsonArray(responseData);
+	return { json: responseData };
 }

@@ -44,9 +44,12 @@ const displayOptions: IDisplayOptions = {
 
 export const description = updateDisplayOptions(displayOptions, properties);
 
-export async function execute(this: IExecuteFunctions): Promise<INodeExecutionData[]> {
-	const orgId = this.getNodeParameter('orgId', 0) as string;
-	const filename = this.getNodeParameter('filename', 0) as string;
+export async function execute(
+	this: IExecuteFunctions,
+	itemIndex: number,
+): Promise<INodeExecutionData> {
+	const orgId = this.getNodeParameter('orgId', itemIndex) as string;
+	const filename = this.getNodeParameter('filename', itemIndex) as string;
 
 	const {
 		createPresignedUrl: { url },
@@ -64,5 +67,5 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
 
 	const fieldValue = `orgs${url.split('/orgs')[1].split('?')[0]}`;
 
-	return this.helpers.returnJsonArray({ url, fieldValue });
+	return { json: { url, fieldValue } };
 }

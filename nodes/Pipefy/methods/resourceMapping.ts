@@ -97,7 +97,7 @@ function mapPipefyFieldType({
 export async function getStartFormFields(
 	this: ILoadOptionsFunctions,
 ): Promise<ResourceMapperFields> {
-	const pipeId = this.getNodeParameter('pipeId', 0) as string;
+	const pipeId = this.getNodeParameter('pipeId') as string;
 
 	const {
 		pipe: { start_form_fields: fields },
@@ -128,8 +128,8 @@ export async function getStartFormFields(
 }
 
 export async function getPhaseFields(this: ILoadOptionsFunctions): Promise<ResourceMapperFields> {
-	const phaseId = this.getNodeParameter('phaseId', 0) as string;
-	const updateOperation = this.getNodeParameter('updateOperation', 0) as string;
+	const phaseId = this.getNodeParameter('phaseId') as string;
+	const updateOperation = this.getNodeParameter('updateOperation') as string;
 
 	const listFieldTypes = [
 		'attachment',

@@ -108,10 +108,13 @@ const displayOptions: IDisplayOptions = {
 
 export const description = updateDisplayOptions(displayOptions, properties);
 
-export async function execute(this: IExecuteFunctions): Promise<INodeExecutionData[]> {
-	const pipeId = this.getNodeParameter('pipeId', 0) as string;
-	const title = this.getNodeParameter('title', 0) as string;
-	const fields = this.getNodeParameter('fields', 0) as ResourceMapperValue;
+export async function execute(
+	this: IExecuteFunctions,
+	itemIndex: number,
+): Promise<INodeExecutionData> {
+	const pipeId = this.getNodeParameter('pipeId', itemIndex) as string;
+	const title = this.getNodeParameter('title', itemIndex) as string;
+	const fields = this.getNodeParameter('fields', itemIndex) as ResourceMapperValue;
 
 	const attributes = resourceMapperValueToPipefyAttributes(fields);
 
@@ -128,5 +131,5 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
 		variables: { pipeId, title, attributes },
 	});
 
-	return this.helpers.returnJsonArray(responseData);
+	return { json: responseData };
 }

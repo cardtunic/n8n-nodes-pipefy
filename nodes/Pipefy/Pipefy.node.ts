@@ -80,6 +80,14 @@ export class Pipefy implements INodeType {
 	};
 
 	async execute(this: IExecuteFunctions) {
-		return await router.call(this);
+		const items = this.getInputData();
+
+		const itemsPromises = items.map(async (_, itemIndex) => {
+			return await router.call(this, itemIndex);
+		});
+
+		const processedItems = await Promise.all(itemsPromises);
+
+		return [this.helpers.returnJsonArray(processedItems)];
 	}
 }

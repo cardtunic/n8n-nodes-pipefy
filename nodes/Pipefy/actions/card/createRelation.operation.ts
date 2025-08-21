@@ -158,20 +158,23 @@ const displayOptions: IDisplayOptions = {
 
 export const description = updateDisplayOptions(displayOptions, properties);
 
-export async function execute(this: IExecuteFunctions): Promise<INodeExecutionData[]> {
-	const parentId = this.getNodeParameter('cardId', 0) as string;
-	const relationSource = this.getNodeParameter('relationSource', 0) as 'field' | 'pipe';
+export async function execute(
+	this: IExecuteFunctions,
+	itemIndex: number,
+): Promise<INodeExecutionData> {
+	const parentId = this.getNodeParameter('cardId', itemIndex) as string;
+	const relationSource = this.getNodeParameter('relationSource', itemIndex) as 'field' | 'pipe';
 
 	let pipeRelationId = '';
 	let fieldId = '';
 
 	if (relationSource === 'field') {
-		fieldId = this.getNodeParameter('fieldId', 0) as string;
+		fieldId = this.getNodeParameter('fieldId', itemIndex) as string;
 	} else {
-		pipeRelationId = this.getNodeParameter('pipeRelationId', 0) as string;
+		pipeRelationId = this.getNodeParameter('pipeRelationId', itemIndex) as string;
 	}
 
-	const childId = this.getNodeParameter('childId', 0) as string;
+	const childId = this.getNodeParameter('childId', itemIndex) as string;
 
 	const sourceId = relationSource === 'field' ? fieldId : pipeRelationId;
 
@@ -194,5 +197,5 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
 		},
 	});
 
-	return this.helpers.returnJsonArray(responseData);
+	return { json: responseData };
 }

@@ -131,15 +131,18 @@ const displayOptions: INodeProperties['displayOptions'] = {
 
 export const description = updateDisplayOptions(displayOptions, properties);
 
-export async function execute(this: IExecuteFunctions): Promise<INodeExecutionData[]> {
-	const cardId = this.getNodeParameter('cardId', 0) as string;
+export async function execute(
+	this: IExecuteFunctions,
+	itemIndex: number,
+): Promise<INodeExecutionData> {
+	const cardId = this.getNodeParameter('cardId', itemIndex) as string;
 
-	const updateOperation = this.getNodeParameter('updateOperation', 0) as
+	const updateOperation = this.getNodeParameter('updateOperation', itemIndex) as
 		| 'add'
 		| 'remove'
 		| 'replace';
 
-	const fields = this.getNodeParameter('fields', 0) as ResourceMapperValue;
+	const fields = this.getNodeParameter('fields', itemIndex) as ResourceMapperValue;
 
 	const nodeValueInputs = resourceMapperValueToPipefyAttributes(fields).map(
 		({ field_id: fieldId, field_value: value }) => ({
@@ -178,5 +181,5 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
 			description: JSON.stringify(updateFieldsValues.userErrors, null, 2),
 		});
 
-	return this.helpers.returnJsonArray(updateFieldsValues);
+	return { json: updateFieldsValues };
 }

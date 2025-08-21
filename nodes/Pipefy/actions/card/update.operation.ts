@@ -126,10 +126,13 @@ const displayOptions: INodeProperties['displayOptions'] = {
 
 export const description = updateDisplayOptions(displayOptions, properties);
 
-export async function execute(this: IExecuteFunctions): Promise<INodeExecutionData[]> {
-	const cardId = this.getNodeParameter('cardId', 0) as string;
-	const title = this.getNodeParameter('title', 0) as string;
-	const dueDate = this.getNodeParameter('dueDate', 0) as string;
+export async function execute(
+	this: IExecuteFunctions,
+	itemIndex: number,
+): Promise<INodeExecutionData> {
+	const cardId = this.getNodeParameter('cardId', itemIndex) as string;
+	const title = this.getNodeParameter('title', itemIndex) as string;
+	const dueDate = this.getNodeParameter('dueDate', itemIndex) as string;
 
 	const { assignees, labels, clearAssignees, clearLabels } = this.getNodeParameter(
 		'additionalFields',
@@ -173,5 +176,5 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
 		},
 	});
 
-	return this.helpers.returnJsonArray({ cardId, title, dueDate, assignees, labels });
+	return { json: { cardId, title, dueDate, assignees, labels } };
 }
