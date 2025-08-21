@@ -36,16 +36,73 @@ const properties: INodeProperties[] = [
 		default: '',
 		hint: 'The new card due date',
 	},
+
 	{
-		displayName: 'Labels',
-		name: 'labels',
-		type: 'multiOptions',
-		default: null,
-		hint: 'The list of labels to replace in the card',
-		typeOptions: {
-			loadOptionsMethod: 'getCardPipeLabels',
-			loadOptionsDependsOn: ['cardId'],
-		},
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		options: [
+			{
+				displayName: 'Labels',
+				name: 'labels',
+				type: 'multiOptions',
+				default: null,
+				hint: 'List of labels to replace in the card',
+				typeOptions: {
+					loadOptionsMethod: 'getCardPipeLabels',
+					loadOptionsDependsOn: ['cardId'],
+				},
+			},
+			{
+				displayName: 'Assignees',
+				name: 'assignees',
+				type: 'multiOptions',
+				default: null,
+				hint: 'List of assignees to replace in the card',
+				typeOptions: {
+					loadOptionsMethod: 'getCardPipeMembers',
+					loadOptionsDependsOn: ['cardId'],
+				},
+			},
+			{
+				displayName: 'Clear Labels',
+				name: 'clearLabels',
+				type: 'boolean',
+				default: true,
+				hint: 'Enable to clear all labels from the card',
+				displayOptions: {
+					hide: {
+						labels: [
+							{
+								_cnd: {
+									exists: true,
+								},
+							},
+						],
+					},
+				},
+			},
+			{
+				displayName: 'Clear Assignees',
+				name: 'clearAssignees',
+				type: 'boolean',
+				default: true,
+				hint: 'Enable to clear all assignees from the card',
+				displayOptions: {
+					hide: {
+						assignees: [
+							{
+								_cnd: {
+									exists: true,
+								},
+							},
+						],
+					},
+				},
+			},
+		],
 		displayOptions: {
 			show: {
 				cardId: [
@@ -57,30 +114,6 @@ const properties: INodeProperties[] = [
 				],
 			},
 		},
-		required: false,
-	},
-	{
-		displayName: 'Assignees',
-		name: 'assignees',
-		type: 'multiOptions',
-		default: null,
-		hint: 'The list of assignees to replace in the card',
-		typeOptions: {
-			loadOptionsMethod: 'getCardPipeMembers',
-			loadOptionsDependsOn: ['cardId'],
-		},
-		displayOptions: {
-			show: {
-				cardId: [
-					{
-						_cnd: {
-							gt: constants.cardIdLength,
-						},
-					},
-				],
-			},
-		},
-		required: false,
 	},
 ];
 
@@ -97,8 +130,16 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
 	const cardId = this.getNodeParameter('cardId', 0) as string;
 	const title = this.getNodeParameter('title', 0) as string;
 	const dueDate = this.getNodeParameter('dueDate', 0) as string;
-	const assignees = this.getNodeParameter('assignees', 0) as string[];
-	const labels = this.getNodeParameter('labels', 0) as string[];
+
+	const { assignees, labels, clearAssignees, clearLabels } = this.getNodeParameter(
+		'additionalFields',
+		0,
+	) as {
+		assignees?: string[];
+		labels?: string[];
+		clearLabels?: boolean;
+		clearAssignees?: boolean;
+	};
 
 	await graphQlRequest({
 		ctx: this,
@@ -106,15 +147,15 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
     mutation updateCard(
       $cardId: ID!,
       ${title ? '$title: String, ' : ''}
-      ${assignees ? '$assignees: [ID], ' : ''} 
-      ${labels ? '$labels: [ID], ' : ''}
+      ${assignees || clearAssignees ? '$assignees: [ID], ' : ''} 
+      ${labels || clearLabels ? '$labels: [ID], ' : ''}
       ${dueDate ? '$dueDate: DateTime' : ''}
     ) { 
       updateCard(input: {
         id: $cardId,
         ${title ? 'title: $title, ' : ''}
-        ${assignees ? 'assignee_ids: $assignees, ' : ''}
-        ${labels ? 'label_ids: $labels, ' : ''}
+        ${assignees || clearAssignees ? 'assignee_ids: $assignees, ' : ''}
+        ${labels || clearLabels ? 'label_ids: $labels, ' : ''}
         ${dueDate ? 'due_date: $dueDate' : ''}
       }) {
         card {
@@ -123,7 +164,13 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
       }
     }
     `,
-		variables: { cardId, title, dueDate, assignees, labels },
+		variables: {
+			cardId,
+			title,
+			dueDate,
+			assignees: clearAssignees ? [] : assignees,
+			labels: clearLabels ? [] : labels,
+		},
 	});
 
 	return this.helpers.returnJsonArray({ cardId, title, dueDate, assignees, labels });
