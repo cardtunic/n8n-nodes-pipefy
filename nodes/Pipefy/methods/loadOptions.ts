@@ -1,5 +1,6 @@
 import { ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
 import { graphQlRequest } from '../transport';
+import { PipefyField } from '../types';
 
 export async function getOrgs(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 	const { organizations } = (await graphQlRequest({
@@ -122,4 +123,60 @@ export async function getCardPipeMembers(
 	})) as { card: { pipe: { members: { user: { id: string; name: string } }[] } } };
 
 	return members.map((member) => ({ name: member.user.name, value: member.user.id }));
+}
+
+export async function getCardPipeRelations(
+	this: ILoadOptionsFunctions,
+): Promise<INodePropertyOptions[]> {
+	const cardId = this.getNodeParameter('cardId', 0) as string;
+
+	const {
+		card: {
+			pipe: { childrenRelations },
+		},
+	} = (await graphQlRequest({
+		ctx: this,
+		query: `
+    query getCardPipeRelations($cardId: ID!) {
+      card(id: $cardId) {
+        pipe {
+          childrenRelations {
+            id
+            name
+          }
+        }
+      }
+    }
+    `,
+		variables: { cardId },
+	})) as { card: { pipe: { childrenRelations: { id: string; name: string }[] } } };
+
+	return childrenRelations.map((relation) => ({ name: relation.name, value: relation.id }));
+}
+
+export async function getPhaseRelationFields(
+	this: ILoadOptionsFunctions,
+): Promise<INodePropertyOptions[]> {
+	const phaseId = this.getNodeParameter('phaseId', 0) as string;
+
+	const {
+		phase: { fields },
+	} = (await graphQlRequest({
+		ctx: this,
+		query: `
+      query getPhaseFields($phaseId: ID!) {
+        phase(id: $phaseId) {
+          fields {
+            type
+            label
+            internal_id
+          }
+        }
+      }`,
+		variables: { phaseId },
+	})) as { phase: { fields: (Pick<PipefyField, 'type' | 'label'> & { internal_id: string })[] } };
+
+	return fields
+		.filter((field) => field.type === 'connector')
+		.map((field) => ({ name: field.label, value: field.internal_id }));
 }

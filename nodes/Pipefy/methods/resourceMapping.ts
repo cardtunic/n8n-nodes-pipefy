@@ -77,6 +77,7 @@ function mapPipefyFieldType({
 				'checklist_horizontal',
 				'checklist_vertical',
 				'label_select',
+				'connector',
 			] as PipefyFieldType[]
 		).includes(type)
 	)

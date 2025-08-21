@@ -1,13 +1,14 @@
 import { INodeProperties } from 'n8n-workflow';
 
 import * as create from './create.operation';
+import * as createRelation from './createRelation.operation';
 import * as destroy from './destroy.operation';
 import * as get from './get.operation';
 import * as move from './move.operation';
 import * as update from './update.operation';
 import * as updateFields from './updateFields.operation';
 
-export { create, destroy, get, move, update, updateFields };
+export { create, createRelation, destroy, get, move, update, updateFields };
 
 export const description: INodeProperties[] = [
 	{
@@ -33,6 +34,12 @@ export const description: INodeProperties[] = [
 				value: 'create',
 				action: 'Create card',
 				description: 'Creates a card',
+			},
+			{
+				name: 'Create relation',
+				value: 'createRelation',
+				action: 'Create card relation',
+				description: 'Creates a relation between one card and another',
 			},
 			{
 				name: 'Move',
@@ -73,4 +80,5 @@ export const description: INodeProperties[] = [
 	...update.description,
 	...updateFields.description,
 	...destroy.description,
+	...createRelation.description,
 ];
