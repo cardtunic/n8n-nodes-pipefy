@@ -51,3 +51,30 @@ export async function graphQlRequest({
 
 	return response.data as IDataObject;
 }
+
+export async function uploadFile({
+	ctx,
+	presignedUrl,
+	buffer,
+	mimeType,
+}: {
+	ctx: IExecuteFunctions;
+	presignedUrl: string;
+	buffer: ArrayBuffer;
+	mimeType: string;
+}) {
+	const options: IHttpRequestOptions = {
+		url: presignedUrl,
+		method: 'PUT',
+		headers: {
+			'Content-Type': mimeType,
+		},
+		body: buffer,
+	};
+
+	try {
+		await ctx.helpers.httpRequest(options);
+	} catch (error) {
+		throw new NodeApiError(ctx.getNode(), error as JsonObject);
+	}
+}

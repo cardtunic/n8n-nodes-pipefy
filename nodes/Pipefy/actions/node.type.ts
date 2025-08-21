@@ -5,6 +5,7 @@ type NodeMap = {
 	org: 'getMany' | 'get';
 	pipe: 'getMany' | 'get';
 	user: 'getCurrent';
+	attachment: 'createPresignedUrl' | 'uploadFile';
 };
 
 export type PipefyType = AllEntities<NodeMap>;

@@ -5,6 +5,7 @@ import {
 	type INodeTypeDescription,
 } from 'n8n-workflow';
 
+import * as attachment from './actions/attachments/Attachment.resource';
 import * as card from './actions/card/Card.resource';
 import * as org from './actions/org/Org.resource';
 import * as pipe from './actions/pipe/Pipe.resource';
@@ -58,6 +59,10 @@ export class Pipefy implements INodeType {
 						name: 'Card',
 						value: 'card',
 					},
+					{
+						name: 'Attachment',
+						value: 'attachment',
+					},
 				],
 				default: 'org',
 			},
@@ -65,6 +70,7 @@ export class Pipefy implements INodeType {
 			...card.description,
 			...pipe.description,
 			...user.description,
+			...attachment.description,
 		],
 	};
 
