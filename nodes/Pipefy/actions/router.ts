@@ -1,6 +1,7 @@
 import { IExecuteFunctions, INodeExecutionData } from 'n8n-workflow';
 import { PipefyType } from './node.type';
 
+import * as attachment from './attachments/Attachment.resource';
 import * as card from './card/Card.resource';
 import * as pipe from './pipe/Pipe.resource';
 import * as user from './user/User.resource';
@@ -30,6 +31,7 @@ export async function router(
 			break;
 
 		case 'attachment':
+			responseData = await attachment[pipefyNodeData.operation].execute.call(this, itemIndex);
 	}
 
 	return responseData;
