@@ -15,7 +15,101 @@ const properties: INodeProperties[] = [
 		default: '',
 		required: true,
 	},
+	{
+		displayName: 'Include labels?',
+		name: 'getLabelsEnabled',
+		type: 'boolean',
+		default: false,
+		description: 'Enable to return the labels of the pipe',
+	},
+	{
+		displayName: 'Include members?',
+		name: 'getMembersEnabled',
+		type: 'boolean',
+		default: false,
+		description: 'Enable to return the members of the pipe',
+	},
+	{
+		displayName: 'Include phases?',
+		name: 'getPhasesEnabled',
+		type: 'boolean',
+		default: false,
+		description: 'Enable to return the phases of the pipe',
+	},
+	{
+		displayName: 'Include webhooks?',
+		name: 'getWebhooksEnabled',
+		type: 'boolean',
+		default: false,
+		description: 'Enable to return the webhooks of the pipe',
+	},
 ];
+
+const optionalQueryParts = properties
+	.filter((prop) => prop.type === 'boolean')
+	.map((prop) => prop.name);
+
+const queryParts = {
+	getLabelsEnabled: `
+  labels {
+    color
+    id
+    name
+  }`,
+	getMembersEnabled: `
+  members {
+    billable
+    customRole
+    role_name
+    user {
+      id
+      email
+      displayName
+      avatarUrl
+      name
+      currentOrganizationRole
+      departmentKey
+      invited
+      phone
+      username
+    }
+  }
+  `,
+	getPhasesEnabled: `
+  phases {
+    can_receive_card_directly_from_draft
+    cards_count
+    color
+    created_at
+    custom_sorting_preferences
+    description
+    done
+    expiredCardsCount
+    id
+    identifyTask
+    index
+    isDraft
+    lateCardsCount
+    lateness_time
+    name
+    next_phase_ids
+    previous_phase_ids
+    repo_id
+    sequentialId
+    uuid
+  }
+  `,
+	getWebhooksEnabled: `
+  webhooks {
+    email
+    filters
+    headers
+    id
+    name
+    url
+  }
+  `,
+};
 
 const displayOptions: IDisplayOptions = {
 	show: {
@@ -32,20 +126,60 @@ export async function execute(
 ): Promise<INodeExecutionData> {
 	const pipeId = this.getNodeParameter('pipeId', itemIndex) as string;
 
+	const optionalQueryPart = optionalQueryParts
+		.map((part) => {
+			const isPartEnabled = (this.getNodeParameter(part, itemIndex) as boolean) === true;
+
+			if (isPartEnabled) return queryParts[part as keyof typeof queryParts];
+
+			return '';
+		})
+		.join('');
+
 	const responseData = await graphQlRequest({
 		ctx: this,
 		query: `
-      query getPipe($pipeId: ID!) {
-        pipe(id: $pipeId) {
-            id,
-            members {
-                user {
-                    id
-                    email
-                }
-            }
+    query getPipe($pipeId: ID!) {
+      pipe(id: $pipeId) {
+        anyone_can_create_card
+        canBeTagged
+        cards_count
+        clone_from_id
+        color
+        conditionExpressionsFieldIds
+        countOnlyWeekDays
+        create_card_label
+        created_at
+        description
+        emailAddress
+        expiration_time_by_unit
+        expiration_unit
+        icon
+        id
+        last_updated_by_card
+        name
+        noun
+        only_admin_can_remove_cards
+        only_assignees_can_edit_cards
+        opened_cards_count
+        organizationId
+        public
+        public_form
+        public_form_active
+        reachedConcurrentBulkActionsLimit
+        role
+        startFormPhaseId
+        suid
+        type
+        users_count
+        uuid
+        organization {
+          id
+          name
         }
-      }`,
+        ${optionalQueryPart}
+      }
+    }`,
 		variables: { pipeId },
 	});
 
