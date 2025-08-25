@@ -9,6 +9,7 @@ import * as attachment from './actions/attachments/Attachment.resource';
 import * as card from './actions/card/Card.resource';
 import * as org from './actions/org/Org.resource';
 import * as pipe from './actions/pipe/Pipe.resource';
+import * as webhook from './actions/webhook/Webhook.resource';
 import { router } from './actions/router';
 import * as user from './actions/user/User.resource';
 import { loadOptions, resourceMapping } from './methods';
@@ -60,6 +61,10 @@ export class Pipefy implements INodeType {
 						value: 'card',
 					},
 					{
+						name: 'Webhook',
+						value: 'webhook',
+					},
+					{
 						name: 'Attachment',
 						value: 'attachment',
 					},
@@ -71,6 +76,7 @@ export class Pipefy implements INodeType {
 			...pipe.description,
 			...user.description,
 			...attachment.description,
+			...webhook.description,
 		],
 	};
 
