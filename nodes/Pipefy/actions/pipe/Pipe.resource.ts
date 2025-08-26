@@ -1,9 +1,8 @@
 import { INodeProperties } from 'n8n-workflow';
 
 import * as get from './get.operation';
-import * as getMany from './getMany.operation';
 
-export { get, getMany };
+export { get };
 
 export const description: INodeProperties[] = [
 	{
@@ -12,12 +11,6 @@ export const description: INodeProperties[] = [
 		type: 'options',
 		noDataExpression: true,
 		options: [
-			{
-				name: 'Get many',
-				value: 'getMany',
-				action: 'Get many pipes',
-				description: 'Lists all pipes in a given org',
-			},
 			{
 				name: 'Get',
 				value: 'get',
@@ -34,5 +27,4 @@ export const description: INodeProperties[] = [
 	},
 
 	...get.description,
-	...getMany.description,
 ];

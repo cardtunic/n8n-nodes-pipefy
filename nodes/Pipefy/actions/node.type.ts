@@ -3,7 +3,7 @@ import { AllEntities } from 'n8n-workflow';
 type NodeMap = {
 	card: 'get' | 'create' | 'move' | 'updateFields' | 'update' | 'destroy' | 'createRelation';
 	org: 'getMany' | 'get';
-	pipe: 'getMany' | 'get';
+	pipe: 'get';
 	user: 'getCurrent';
 	attachment: 'createPresignedUrl' | 'uploadFile';
 	webhook: 'getFromOrg' | 'getFromPipe' | 'destroy' | 'createInOrg' | 'createInPipe';
