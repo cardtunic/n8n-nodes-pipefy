@@ -136,7 +136,7 @@ export async function execute(
 
 	const { assignees, labels, clearAssignees, clearLabels } = this.getNodeParameter(
 		'additionalFields',
-		0,
+		itemIndex,
 	) as {
 		assignees?: string[];
 		labels?: string[];

@@ -1,8 +1,12 @@
 import { INodeProperties } from 'n8n-workflow';
 
-import * as create from './create.operation';
+import * as getFromOrg from './getFromOrg.operation';
+import * as getFromPipe from './getFromPipe.operation';
+import * as destroy from './destroy.operation';
+import * as createInOrg from './createInOrg.operation';
+import * as createInPipe from './createInPipe.operation';
 
-export { create };
+export { getFromOrg, getFromPipe, destroy, createInOrg, createInPipe };
 
 export const description: INodeProperties[] = [
 	{
@@ -12,10 +16,34 @@ export const description: INodeProperties[] = [
 		noDataExpression: true,
 		options: [
 			{
-				name: 'Create',
-				value: 'create',
-				action: 'Create webhook',
-				description: 'Create a webhook at the organization or pipe level',
+				name: 'Get org webhooks',
+				value: 'getFromOrg',
+				action: 'Get org webhooks',
+				description: 'Get all webhooks in the organization level',
+			},
+			{
+				name: 'Get pipe webhooks',
+				value: 'getFromPipe',
+				action: 'Get pipe webhooks',
+				description: 'Get all webhooks in the pipe level',
+			},
+			{
+				name: 'Create org webhook',
+				value: 'createInOrg',
+				action: 'Create org webhook',
+				description: 'Create a webhook to watch organization events',
+			},
+			{
+				name: 'Create pipe webhook',
+				value: 'createInPipe',
+				action: 'Create pipe webhook',
+				description: 'Create a webhook to watch pipe events',
+			},
+			{
+				name: 'Delete',
+				value: 'destroy',
+				action: 'Delete webhook',
+				description: 'Deletes a given webhook',
 			},
 		],
 		default: 'get',
@@ -26,5 +54,11 @@ export const description: INodeProperties[] = [
 		},
 	},
 
-	...create.description,
+	...getFromOrg.description,
+	...getFromPipe.description,
+
+	...createInOrg.description,
+	...createInPipe.description,
+
+	...destroy.description,
 ];

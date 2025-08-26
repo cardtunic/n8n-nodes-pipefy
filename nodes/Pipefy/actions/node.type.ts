@@ -6,6 +6,7 @@ type NodeMap = {
 	pipe: 'getMany' | 'get';
 	user: 'getCurrent';
 	attachment: 'createPresignedUrl' | 'uploadFile';
+	webhook: 'getFromOrg' | 'getFromPipe' | 'destroy' | 'createInOrg' | 'createInPipe';
 };
 
 export type PipefyType = AllEntities<NodeMap>;

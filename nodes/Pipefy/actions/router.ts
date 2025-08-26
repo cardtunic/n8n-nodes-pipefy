@@ -5,6 +5,7 @@ import * as attachment from './attachments/Attachment.resource';
 import * as card from './card/Card.resource';
 import * as pipe from './pipe/Pipe.resource';
 import * as user from './user/User.resource';
+import * as webhook from './webhook/Webhook.resource';
 
 export async function router(
 	this: IExecuteFunctions,
@@ -32,6 +33,10 @@ export async function router(
 
 		case 'attachment':
 			responseData = await attachment[pipefyNodeData.operation].execute.call(this, itemIndex);
+			break;
+
+		case 'webhook':
+			responseData = await webhook[pipefyNodeData.operation].execute.call(this, itemIndex);
 	}
 
 	return responseData;

@@ -41,6 +41,35 @@ export async function getOrgPipes(this: ILoadOptionsFunctions): Promise<INodePro
 	return pipes.map((pipe) => ({ name: pipe.name, value: pipe.id }));
 }
 
+export async function getPipes(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+	const orgs = await getOrgs.call(this);
+
+	const getPipesPromises = orgs.map(async ({ value: orgId }) => {
+		const {
+			organization: { pipes },
+		} = (await graphQlRequest({
+			ctx: this,
+			query: `
+    query getOrgPipes($orgId: ID!) {
+      organization(id: $orgId) {
+        pipes {
+          id
+          name
+        }
+      }
+      
+    }`,
+			variables: { orgId },
+		})) as { organization: { pipes: { id: string; name: string }[] } };
+
+		return pipes;
+	});
+
+	const pipes = await Promise.all(getPipesPromises);
+
+	return pipes.flat().map((pipe) => ({ name: pipe.name, value: pipe.id }));
+}
+
 export async function getPipePhases(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 	const cardId = this.getNodeParameter('cardId') as string;
 
