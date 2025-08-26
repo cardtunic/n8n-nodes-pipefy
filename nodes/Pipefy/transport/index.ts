@@ -28,12 +28,14 @@ export async function graphQlRequest({
 		},
 	};
 
+	const authenticationMethod = ctx.getNodeParameter('authentication', 0) as string;
+
 	let response: IDataObject;
 
 	try {
 		response = await ctx.helpers.httpRequestWithAuthentication.call(
 			ctx,
-			'pipefyPersonalToken',
+			authenticationMethod,
 			options,
 		);
 	} catch (error) {

@@ -1,5 +1,6 @@
 import type {
 	IAuthenticateGeneric,
+	Icon,
 	ICredentialTestRequest,
 	ICredentialType,
 	INodeProperties,
@@ -8,16 +9,25 @@ import type {
 export class PipefyPersonalToken implements ICredentialType {
 	name = 'pipefyPersonalToken';
 
-	displayName = 'Pipefy Personal Token';
+	icon = 'file:pipefy.svg' as Icon;
+
+	displayName = 'Pipefy Access Personal Token';
 
 	documentationUrl = 'https://developers.pipefy.com/reference/personal-access-token';
 
 	properties: INodeProperties[] = [
 		{
-			displayName: 'Personal Token',
+			displayName: 'Personal Access Token',
 			name: 'personalToken',
 			type: 'string',
 			typeOptions: { password: true },
+			default: '',
+		},
+		{
+			displayName:
+				'⚠️ Personal Access Tokens are not intended to be used in production environments and process integrations.',
+			name: 'importantNotice',
+			type: 'notice',
 			default: '',
 		},
 	];
