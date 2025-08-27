@@ -1,48 +1,82 @@
-![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
+# n8n-nodes-pipefy
 
-# n8n-nodes-starter
+A community node that brings _(part of)_ the [Pipefy GraphQL API](https://developers.pipefy.com/graphql) to your n8n instance! With it you can create, update, delete, and get information about your Pipefy organizations, pipes, cards and webhooks.
 
-This repo contains example nodes to help you get started building your own custom integrations for [n8n](https://n8n.io). It includes the node linter and other dependencies.
+![Banner image](https://i.imgur.com/LHBRQAi.png)
 
-To make your custom node available to the community, you must create it as an npm package, and [submit it to the npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
+[Installation](#installation)  
+[Operations](#operations)  
+[Credentials](#credentials)  
+[Compatibility](#compatibility)  
+[Resources](#resources)  
+[License](#license)
 
-If you would like your node to be available on n8n cloud you can also [submit your node for verification](https://docs.n8n.io/integrations/creating-nodes/deploy/submit-community-nodes/).
+## Installation
 
-## Prerequisites
+Simply go to Settings > Community Nodes, click on the "Install" button, and paste the package name `@cardtunic/n8n-nodes-pipefy`. Mark the _"I understand the risks..."_ checkbox and click on "Install".
 
-You need the following installed on your development machine:
+If you encounter any issues, please refer to the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
 
-* [git](https://git-scm.com/downloads)
-* Node.js and npm. Minimum version Node 20. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
-* Install n8n with:
-  ```
-  npm install n8n -g
-  ```
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+## Operations
 
-## Using this starter
+![Screenshot of the available operations in n8n UI](https://i.imgur.com/lL5g7a1.png)
 
-These are the basic steps for working with the starter. For detailed guidance on creating and publishing nodes, refer to the [documentation](https://docs.n8n.io/integrations/creating-nodes/).
+### Attachments
 
-1. [Generate a new repository](https://github.com/n8n-io/n8n-nodes-starter/generate) from this template repository.
-2. Clone your new repo:
-   ```
-   git clone https://github.com/<your organization>/<your-repo-name>.git
-   ```
-3. Run `npm i` to install dependencies.
-4. Open the project in your editor.
-5. Browse the examples in `/nodes` and `/credentials`. Modify the examples, or replace them with your own nodes.
-6. Update the `package.json` to match your details.
-7. Run `npm run lint` to check for errors or `npm run lintfix` to automatically fix errors when possible.
-8. Test your node locally. Refer to [Run your node locally](https://docs.n8n.io/integrations/creating-nodes/test/run-node-locally/) for guidance.
-9. Replace this README with documentation for your node. Use the [README_TEMPLATE](README_TEMPLATE.md) to get started.
-10. Update the LICENSE file to use your details.
-11. [Publish](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) your package to npm.
+- **Create Presigned URL**: Creates a presigned URL to upload a file to Pipefy
+- **Upload File**: Sends a PUT request to upload a file to a created presigned URL
 
-## More information
+### Cards
 
-Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building your own nodes.
+- **Create**: Creates a card
+- **Create Relation**: Creates a relation between one card and another
+- **Delete**: Deletes a given card
+- **Get**: Gets a card by ID
+- **Get Many**: Lists all cards inside a given pipe
+- **Move**: Moves a card to a given phase
+- **Update**: Updates a given card
+- **Update Fields**: Updates the fields of a given card
+
+### Pipes
+
+- **Get**: Gets a pipe by ID
+
+### Users
+
+- **Get Current**: Returns the authenticated user
+
+### Webhooks
+
+- **Create In Org**: Create a webhook to watch organization events
+- **Create In Pipe**: Create a webhook to watch pipe events
+- **Delete**: Deletes a given webhook
+- **Get From Org**: Get all webhooks related to a given organization
+- **Get From Pipe**: Get all webhooks related to a given pipe
+
+## Credentials
+
+There're two types of credentials that can be used to authenticate with the Pipefy API: **Service Accounts and Personal Access Tokens.**
+
+![Screenshot of the credentials modal in n8n](https://i.imgur.com/ypRAD4z.png)
+
+### Service Accounts (recommended)
+
+Service Accounts are special accounts that you can create as a superuser in Pipefy dashboard. After creation, you will recieve the Client ID and Client secret that you need to paste into n8n. This is the recommended way to authenticate with the API for production environments, providing expiration time for tokens, permission control trough roles and separation from user accounts. For more details, refer to the [Pipefy service ccounts docs](https://developers.pipefy.com/reference/service-accounts).
+
+### Personal Access Tokens
+
+Personal Access Tokens are a simple way to authenticate with the API. You can simply generate a new token in the your profile settings in Pipefy and paste the token into n8n. For more details, refer to the [Pipefy personal access tokens docs](https://developers.pipefy.com/reference/personal-access-token).
+
+## Compatibility
+
+This node was only tested in 1.106.3 n8n version, but it should work in any version 1.x.x above.
+
+## Resources
+
+- [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
+- [Pipefy API reference](https://developers.pipefy.com/reference/why-graphql)
+- [Pipefy API GraphQL explorer](https://developers.pipefy.com/graphql)
 
 ## License
 
-[MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+[MIT](https://github.com/cardtunic/n8n-nodes-pipefy/blob/master/LICENSE.md)
