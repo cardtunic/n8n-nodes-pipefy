@@ -10,7 +10,7 @@ export const description: INodeProperties[] = [
 		noDataExpression: true,
 		options: [
 			{
-				name: 'Get current',
+				name: 'Get Current',
 				value: 'getCurrent',
 				action: 'Get authenticated user',
 				description: 'Returns the authenticated user',

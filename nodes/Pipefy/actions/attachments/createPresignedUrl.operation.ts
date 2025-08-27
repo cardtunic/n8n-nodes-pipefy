@@ -9,12 +9,12 @@ import { graphQlRequest } from '../../transport';
 
 const properties: INodeProperties[] = [
 	{
-		displayName: 'Org ID',
+		displayName: 'Org Name or ID',
 		name: 'orgId',
 		type: 'options',
 		default: '',
 		required: true,
-		description: 'ID of the organization',
+		description: 'ID of the organization. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		typeOptions: {
 			loadOptionsMethod: 'getOrgs',
 		},

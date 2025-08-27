@@ -14,9 +14,10 @@ const properties: INodeProperties[] = [
 	webhookProperties.url,
 
 	{
-		displayName: 'Pipe ID',
+		displayName: 'Pipe Name or ID',
 		name: 'pipeId',
 		type: 'options',
+		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 		default: '',
 		required: true,
 		typeOptions: {
@@ -28,7 +29,7 @@ const properties: INodeProperties[] = [
 		displayName: 'Events',
 		name: 'events',
 		type: 'multiOptions',
-		default: null,
+		default: [],
 		options: [
 			{ name: 'card.comment_create', value: 'card.comment_create' },
 			{ name: 'card.create', value: 'card.create' },

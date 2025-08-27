@@ -16,25 +16,25 @@ export const description: INodeProperties[] = [
 		noDataExpression: true,
 		options: [
 			{
-				name: 'Get org webhooks',
+				name: 'Get Org Webhooks',
 				value: 'getFromOrg',
 				action: 'Get org webhooks',
 				description: 'Get all webhooks in the organization level',
 			},
 			{
-				name: 'Get pipe webhooks',
+				name: 'Get Pipe Webhooks',
 				value: 'getFromPipe',
 				action: 'Get pipe webhooks',
 				description: 'Get all webhooks in the pipe level',
 			},
 			{
-				name: 'Create org webhook',
+				name: 'Create Org Webhook',
 				value: 'createInOrg',
 				action: 'Create org webhook',
 				description: 'Create a webhook to watch organization events',
 			},
 			{
-				name: 'Create pipe webhook',
+				name: 'Create Pipe Webhook',
 				value: 'createInPipe',
 				action: 'Create pipe webhook',
 				description: 'Create a webhook to watch pipe events',
@@ -46,7 +46,7 @@ export const description: INodeProperties[] = [
 				description: 'Deletes a given webhook',
 			},
 		],
-		default: 'get',
+		default: 'getFromOrg',
 		displayOptions: {
 			show: {
 				resource: ['webhook'],

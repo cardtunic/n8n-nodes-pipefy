@@ -23,7 +23,7 @@ const properties: INodeProperties[] = [
 		default: '',
 	},
 	{
-		displayName: 'Binary field name',
+		displayName: 'Binary Field Name',
 		name: 'binaryFieldName',
 		type: 'string',
 		default: '',

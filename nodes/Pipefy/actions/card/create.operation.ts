@@ -11,23 +11,23 @@ import { resourceMapperValueToPipefyAttributes } from '../../utils';
 
 const properties: INodeProperties[] = [
 	{
-		displayName: 'Org ID',
+		displayName: 'Org Name or ID',
 		name: 'orgId',
 		type: 'options',
 		default: '',
 		required: true,
-		description: 'The ID of the organization to get the pipes from',
+		description: 'The ID of the organization to get the pipes from. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		typeOptions: {
 			loadOptionsMethod: 'getOrgs',
 		},
 	},
 	{
-		displayName: 'Pipe ID',
+		displayName: 'Pipe Name or ID',
 		name: 'pipeId',
 		type: 'options',
 		default: '',
 		required: true,
-		description: 'The ID of the pipe to get the cards from',
+		description: 'The ID of the pipe to get the cards from. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		typeOptions: {
 			loadOptionsMethod: 'getOrgPipes',
 			loadOptionsDependsOn: ['orgId'],

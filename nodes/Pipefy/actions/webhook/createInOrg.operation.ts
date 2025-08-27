@@ -14,9 +14,10 @@ const properties: INodeProperties[] = [
 	webhookProperties.url,
 
 	{
-		displayName: 'Org ID',
+		displayName: 'Org Name or ID',
 		name: 'orgId',
 		type: 'options',
+		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 		default: '',
 		required: true,
 		typeOptions: {
@@ -27,7 +28,7 @@ const properties: INodeProperties[] = [
 		displayName: 'Events',
 		name: 'events',
 		type: 'multiOptions',
-		default: null,
+		default: [],
 		options: [
 			{ name: 'user.invitation_sent', value: 'user.invitation_sent' },
 			{ name: 'user.invitation_acceptance', value: 'user.invitation_acceptance' },

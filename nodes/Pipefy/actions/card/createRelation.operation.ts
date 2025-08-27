@@ -16,7 +16,7 @@ const properties: INodeProperties[] = [
 		required: true,
 		hint: 'The ID of the card parent card in the relation',
 		description:
-			"You can find the card's ID in the URL when you're viewing it in the browser. https://app.pipefy.com/open-cards/[ID]",
+			"You can find the card's ID in the URL when you're viewing it in the browser. https://app.pipefy.com/open-cards/[ID].",
 		type: 'string',
 		typeOptions: {
 			minValue: constants.cardIdLength,
@@ -55,16 +55,17 @@ const properties: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Pipe Relation ID',
+		displayName: 'Pipe Relation Name or ID',
 		name: 'pipeRelationId',
 		type: 'options',
 		typeOptions: {
 			loadOptionsMethod: 'getCardPipeRelations',
 			loadOptionsDependsOn: ['cardId', 'relationSource'],
 		},
-		default: null,
+		default: '',
 		required: true,
-		description: "Pipe Relation ID defined in the card's pipe",
+		description:
+			'Pipe Relation ID defined in the card\'s pipe. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		displayOptions: {
 			show: {
 				relationSource: ['pipe'],
@@ -79,11 +80,12 @@ const properties: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Phase ID',
+		displayName: 'Phase Name or ID',
 		name: 'phaseId',
 		default: '',
 		required: true,
-		description: 'Phase ID where the relation field is',
+		description:
+			'Phase ID where the relation field is. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		type: 'options',
 		typeOptions: {
 			loadOptionsMethod: 'getPipePhases',
@@ -103,11 +105,12 @@ const properties: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Field Relation ID',
+		displayName: 'Field Relation Name or ID',
 		name: 'fieldId',
 		default: '',
 		required: true,
-		description: 'ID of a field of type "connector"',
+		description:
+			'ID of a field of type "connector". Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		type: 'options',
 		typeOptions: {
 			loadOptionsMethod: 'getPhaseRelationFields',
@@ -140,7 +143,7 @@ const properties: INodeProperties[] = [
 		required: true,
 		hint: 'The ID of the child card in the relation',
 		description:
-			"You can find the card's ID in the URL when you're viewing it in the browser. https://app.pipefy.com/open-cards/[ID]",
+			"You can find the card's ID in the URL when you're viewing it in the browser. https://app.pipefy.com/open-cards/[ID].",
 		type: 'string',
 		typeOptions: {
 			minValue: constants.cardIdLength,

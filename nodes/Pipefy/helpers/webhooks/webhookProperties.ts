@@ -21,14 +21,13 @@ export default {
 
 	authToken: [
 		{
-			displayName: 'Authorization token',
+			displayName: 'Authorization Token',
 			name: 'authorizationToken',
 			type: 'string',
 			default: '',
 			typeOptions: {
 				password: true,
 			},
-			required: false,
 			hint: "This will sended in every request in the 'X-Pipefy-Signature' header",
 		},
 		{
@@ -49,7 +48,7 @@ export default {
 			default: {},
 			options: [
 				{
-					displayName: 'Notification email',
+					displayName: 'Notification Email',
 					name: 'notificationEmail',
 					type: 'string',
 					default: '',
@@ -57,7 +56,7 @@ export default {
 					hint: "The webhook's notification email",
 				},
 				{
-					displayName: 'Custom headers',
+					displayName: 'Custom Headers',
 					name: 'customHeaders',
 					type: 'json',
 					default: '',

@@ -17,8 +17,7 @@ const properties: INodeProperties[] = [
 		default: '',
 		required: true,
 		hint: 'The ID of the card to update the fields of',
-		description:
-			"You can find the card's ID in the URL when you're viewing it in the browser. https://app.pipefy.com/open-cards/[ID]",
+		description: 'You can find the card\'s ID in the URL when you\'re viewing it in the browser. https://app.pipefy.com/open-cards/[ID].',
 		type: 'string',
 		typeOptions: {
 			minValue: constants.cardIdLength,
@@ -26,11 +25,11 @@ const properties: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Phase ID',
+		displayName: 'Phase Name or ID',
 		name: 'phaseId',
 		default: '',
 		required: true,
-		description: 'The ID of the phase to move',
+		description: 'The ID of the phase to move. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		type: 'options',
 		typeOptions: {
 			loadOptionsMethod: 'getPipePhases',
@@ -49,7 +48,7 @@ const properties: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Update operation',
+		displayName: 'Update Operation',
 		name: 'updateOperation',
 		type: 'options',
 		default: 'replace',
@@ -58,19 +57,17 @@ const properties: INodeProperties[] = [
 			{
 				name: 'Replace',
 				value: 'replace',
-				description: 'Replace the existing value with the new one provided.',
+				description: 'Replace the existing value with the new one provided',
 			},
 			{
 				name: 'Add',
 				value: 'add',
-				description:
-					'Append values to existing list of values, compatible with field types that support lists like Attachments, Assignees, Labels, Connections and Checklists.',
+				description: 'Append values to existing list of values, compatible with field types that support lists like Attachments, Assignees, Labels, Connections and Checklists',
 			},
 			{
 				name: 'Remove',
 				value: 'remove',
-				description:
-					'Remove values from the existing list of values, compatible with field types that support lists like Attachments, Assignees, Labels, Connections and Checklists.',
+				description: 'Remove values from the existing list of values, compatible with field types that support lists like Attachments, Assignees, Labels, Connections and Checklists',
 			},
 		],
 		required: true,

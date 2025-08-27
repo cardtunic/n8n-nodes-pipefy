@@ -14,8 +14,7 @@ const properties: INodeProperties[] = [
 		default: '',
 		required: true,
 		hint: 'The ID of the card to update the fields of',
-		description:
-			"You can find the card's ID in the URL when you're viewing it in the browser. https://app.pipefy.com/open-cards/[ID]",
+		description: 'You can find the card\'s ID in the URL when you\'re viewing it in the browser. https://app.pipefy.com/open-cards/[ID].',
 		type: 'string',
 		typeOptions: {
 			minValue: constants.cardIdLength,
@@ -30,7 +29,7 @@ const properties: INodeProperties[] = [
 		hint: 'The new title of the card',
 	},
 	{
-		displayName: 'Due date',
+		displayName: 'Due Date',
 		name: 'dueDate',
 		type: 'dateTime',
 		default: '',
@@ -45,10 +44,11 @@ const properties: INodeProperties[] = [
 		default: {},
 		options: [
 			{
-				displayName: 'Labels',
+				displayName: 'Label Names or IDs',
 				name: 'labels',
 				type: 'multiOptions',
-				default: null,
+				description: 'Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+				default: [],
 				hint: 'List of labels to replace in the card',
 				typeOptions: {
 					loadOptionsMethod: 'getCardPipeLabels',
@@ -56,10 +56,11 @@ const properties: INodeProperties[] = [
 				},
 			},
 			{
-				displayName: 'Assignees',
+				displayName: 'Assignee Names or IDs',
 				name: 'assignees',
 				type: 'multiOptions',
-				default: null,
+				description: 'Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+				default: [],
 				hint: 'List of assignees to replace in the card',
 				typeOptions: {
 					loadOptionsMethod: 'getCardPipeMembers',

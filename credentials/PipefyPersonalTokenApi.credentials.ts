@@ -6,12 +6,12 @@ import type {
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class PipefyPersonalToken implements ICredentialType {
-	name = 'pipefyPersonalToken';
+export class PipefyPersonalTokenApi implements ICredentialType {
+	name = 'pipefyPersonalTokenApi';
 
 	icon = 'file:pipefy.svg' as Icon;
 
-	displayName = 'Pipefy Access Personal Token';
+	displayName = 'Pipefy Access Personal Token API';
 
 	documentationUrl = 'https://developers.pipefy.com/reference/personal-access-token';
 

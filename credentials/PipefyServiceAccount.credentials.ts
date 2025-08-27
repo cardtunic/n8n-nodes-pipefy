@@ -8,12 +8,12 @@ import type {
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class PipefyServiceAccount implements ICredentialType {
-	name = 'pipefyServiceAccount';
+export class PipefyServiceAccountApi implements ICredentialType {
+	name = 'pipefyServiceAccountApi';
 
 	icon = 'file:pipefy.svg' as Icon;
 
-	displayName = 'Pipefy Service Account';
+	displayName = 'Pipefy Service Account API';
 
 	documentationUrl = 'https://developers.pipefy.com/reference/service-accounts';
 

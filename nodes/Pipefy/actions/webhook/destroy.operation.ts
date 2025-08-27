@@ -20,7 +20,7 @@ const properties: INodeProperties[] = [
 		displayName: 'Type',
 		name: 'type',
 		type: 'options',
-		default: null,
+		default: 'org',
 		options: [
 			{
 				name: 'Org',

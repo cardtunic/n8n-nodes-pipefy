@@ -16,8 +16,7 @@ const properties: INodeProperties[] = [
 		default: '',
 		required: true,
 		hint: 'The ID of the card to delete',
-		description:
-			"You can find the card's ID in the URL when you're viewing it in the browser. https://app.pipefy.com/open-cards/[ID]",
+		description: 'You can find the card\'s ID in the URL when you\'re viewing it in the browser. https://app.pipefy.com/open-cards/[ID].',
 		type: 'string',
 		typeOptions: {
 			minValue: constants.cardIdLength,

@@ -10,16 +10,17 @@ export const description: INodeProperties[] = [
 		displayName: 'Operation',
 		name: 'operation',
 		type: 'options',
+		noDataExpression: true,
 		default: 'createPresignedUrl',
 		options: [
 			{
-				name: 'Create presigned URL',
+				name: 'Create Presigned URL',
 				value: 'createPresignedUrl',
 				description: 'Creates a presigned URL to upload a file to Pipefy',
 				action: 'Create presigned URL',
 			},
 			{
-				name: 'Upload file',
+				name: 'Upload File',
 				value: 'uploadFile',
 				description: 'Sends a PUT request to upload a file to a created presigned URL',
 				action: 'Upload file',

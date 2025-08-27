@@ -8,7 +8,7 @@ export const description: INodeProperties[] = [
 		noDataExpression: true,
 		options: [
 			{
-				name: 'Get many',
+				name: 'Get Many',
 				value: 'getMany',
 				action: 'Get many orgs',
 				description: 'Lists all orgs that the user has access to',

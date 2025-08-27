@@ -9,9 +9,10 @@ import { graphQlRequest } from '../../transport';
 
 const properties: INodeProperties[] = [
 	{
-		displayName: 'Pipe ID',
+		displayName: 'Pipe Name or ID',
 		name: 'pipeId',
 		type: 'options',
+		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 		default: '',
 		required: true,
 		typeOptions: {
