@@ -94,7 +94,7 @@ export class Pipefy implements INodeType {
 						value: 'webhook',
 					},
 				],
-				default: 'org',
+				default: 'card',
 			},
 			...attachment.description,
 			...card.description,
