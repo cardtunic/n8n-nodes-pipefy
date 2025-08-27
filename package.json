@@ -1,6 +1,6 @@
 {
 	"name": "@cardtunic/n8n-nodes-pipefy",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"description": "A community node that brings (part of) the Pipefy GraphQL API to your n8n instance!",
 	"keywords": [
 		"n8n-community-node-package",
