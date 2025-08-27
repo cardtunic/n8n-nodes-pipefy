@@ -3,7 +3,10 @@
 	"version": "0.1.0",
 	"description": "A community node that brings (part of) the Pipefy GraphQL API to your n8n instance!",
 	"keywords": [
-		"n8n-community-node-package"
+		"n8n-community-node-package",
+		"pipefy",
+		"n8n",
+		"graphql"
 	],
 	"license": "MIT",
 	"homepage": "",
