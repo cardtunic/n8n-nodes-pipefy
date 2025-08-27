@@ -17,7 +17,8 @@ const properties: INodeProperties[] = [
 		displayName: 'Org Name or ID',
 		name: 'orgId',
 		type: 'options',
-		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 		default: '',
 		required: true,
 		typeOptions: {
@@ -30,12 +31,12 @@ const properties: INodeProperties[] = [
 		type: 'multiOptions',
 		default: [],
 		options: [
-			{ name: 'user.invitation_sent', value: 'user.invitation_sent' },
 			{ name: 'user.invitation_acceptance', value: 'user.invitation_acceptance' },
-			{ name: 'user.role_set', value: 'user.role_set' },
+			{ name: 'user.invitation_sent', value: 'user.invitation_sent' },
 			{ name: 'user.removal_from_org', value: 'user.removal_from_org' },
 			{ name: 'user.removal_from_pipe', value: 'user.removal_from_pipe' },
 			{ name: 'user.removal_from_table', value: 'user.removal_from_table' },
+			{ name: 'user.role_set', value: 'user.role_set' },
 		],
 		required: true,
 	},

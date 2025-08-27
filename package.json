@@ -1,14 +1,14 @@
 {
 	"name": "@cardtunic/n8n-nodes-pipefy",
 	"version": "0.1.0",
-	"description": "",
+	"description": "A community node that brings (part of) the Pipefy GraphQL API to your n8n instance!",
 	"keywords": [
 		"n8n-community-node-package"
 	],
 	"license": "MIT",
 	"homepage": "",
 	"author": {
-		"name": "",
+		"name": "Kaleb Mendes",
 		"email": "cardtunic@gmail.com"
 	},
 	"repository": {

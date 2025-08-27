@@ -75,8 +75,12 @@ export class Pipefy implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'User',
-						value: 'user',
+						name: 'Attachment',
+						value: 'attachment',
+					},
+					{
+						name: 'Card',
+						value: 'card',
 					},
 					{
 						name: 'Organization',
@@ -87,25 +91,21 @@ export class Pipefy implements INodeType {
 						value: 'pipe',
 					},
 					{
-						name: 'Card',
-						value: 'card',
+						name: 'User',
+						value: 'user',
 					},
 					{
 						name: 'Webhook',
 						value: 'webhook',
 					},
-					{
-						name: 'Attachment',
-						value: 'attachment',
-					},
 				],
 				default: 'org',
 			},
-			...org.description,
+			...attachment.description,
 			...card.description,
+			...org.description,
 			...pipe.description,
 			...user.description,
-			...attachment.description,
 			...webhook.description,
 		],
 	};

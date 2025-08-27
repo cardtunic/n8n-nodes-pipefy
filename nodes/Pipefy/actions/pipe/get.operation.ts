@@ -20,28 +20,28 @@ const properties: INodeProperties[] = [
 		name: 'getLabelsEnabled',
 		type: 'boolean',
 		default: false,
-		description: 'Enable to return the labels of the pipe',
+		description: 'Whether to return the labels of the pipe',
 	},
 	{
 		displayName: 'Include Members?',
 		name: 'getMembersEnabled',
 		type: 'boolean',
 		default: false,
-		description: 'Enable to return the members of the pipe',
+		description: 'Whether to return the members of the pipe',
 	},
 	{
 		displayName: 'Include Phases?',
 		name: 'getPhasesEnabled',
 		type: 'boolean',
 		default: false,
-		description: 'Enable to return the phases of the pipe',
+		description: 'Whether to return the phases of the pipe',
 	},
 	{
 		displayName: 'Include Webhooks?',
 		name: 'getWebhooksEnabled',
 		type: 'boolean',
 		default: false,
-		description: 'Enable to return the webhooks of the pipe',
+		description: 'Whether to return the webhooks of the pipe',
 	},
 ];
 

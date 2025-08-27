@@ -18,18 +18,6 @@ export const description: INodeProperties[] = [
 		noDataExpression: true,
 		options: [
 			{
-				name: 'Get Many',
-				value: 'getMany',
-				action: 'Get many cards',
-				description: 'Lists all cards inside a given pipe',
-			},
-			{
-				name: 'Get',
-				value: 'get',
-				action: 'Get card',
-				description: 'Gets a card by ID',
-			},
-			{
 				name: 'Create',
 				value: 'create',
 				action: 'Create card',
@@ -40,6 +28,24 @@ export const description: INodeProperties[] = [
 				value: 'createRelation',
 				action: 'Create card relation',
 				description: 'Creates a relation between one card and another',
+			},
+			{
+				name: 'Delete',
+				value: 'destroy',
+				action: 'Delete card',
+				description: 'Deletes a given card',
+			},
+			{
+				name: 'Get',
+				value: 'get',
+				action: 'Get card',
+				description: 'Gets a card by ID',
+			},
+			{
+				name: 'Get Many',
+				value: 'getMany',
+				action: 'Get many cards',
+				description: 'Lists all cards inside a given pipe',
 			},
 			{
 				name: 'Move',
@@ -58,12 +64,6 @@ export const description: INodeProperties[] = [
 				value: 'updateFields',
 				action: 'Update card fields',
 				description: 'Updates the fields of a given card',
-			},
-			{
-				name: 'Delete',
-				value: 'destroy',
-				action: 'Delete card',
-				description: 'Deletes a given card',
 			},
 		],
 		default: 'get',
