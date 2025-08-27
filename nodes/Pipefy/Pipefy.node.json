@@ -2,7 +2,7 @@
 	"node": "n8n-nodes-base.pipefy",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["Sales", "Productivity"],
+	"categories": ["Productivity", "Miscellaneous", "Utility"],
 	"resources": {
 		"credentialDocumentation": [
 			{
