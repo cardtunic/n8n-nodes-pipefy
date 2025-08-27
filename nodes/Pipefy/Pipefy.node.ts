@@ -36,7 +36,7 @@ export class Pipefy implements INodeType {
 				required: true,
 				displayOptions: {
 					show: {
-						authentication: ['pipefyServiceAccount'],
+						authentication: ['pipefyServiceAccountApi'],
 					},
 				},
 			},
@@ -59,14 +59,14 @@ export class Pipefy implements INodeType {
 				options: [
 					{
 						name: 'Service Account',
-						value: 'pipefyServiceAccount',
+						value: 'pipefyServiceAccountApi',
 					},
 					{
 						name: 'Personal Access Token',
 						value: 'pipefyPersonalTokenApi',
 					},
 				],
-				default: 'pipefyServiceAccount',
+				default: 'pipefyServiceAccountApi',
 			},
 			{
 				displayName: 'Resource',
