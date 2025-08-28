@@ -27,22 +27,12 @@ const properties: INodeProperties[] = [
 		name: 'phaseId',
 		default: '',
 		required: true,
-		description: 'The ID of the phase to move. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+		description:
+			'The ID of the phase to move. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		type: 'options',
 		typeOptions: {
 			loadOptionsMethod: 'getPipePhases',
 			loadOptionsDependsOn: ['cardId'],
-		},
-		displayOptions: {
-			show: {
-				cardId: [
-					{
-						_cnd: {
-							gt: constants.cardIdLength,
-						},
-					},
-				],
-			},
 		},
 	},
 ];
