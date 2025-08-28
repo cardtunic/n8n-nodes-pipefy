@@ -6,7 +6,7 @@ import {
 	ResourceMapperValue,
 	updateDisplayOptions,
 } from 'n8n-workflow';
-import constants from '../../constants';
+
 import { graphQlRequest } from '../../transport';
 import { resourceMapperValueToPipefyAttributes } from '../../utils';
 
@@ -20,10 +20,6 @@ const properties: INodeProperties[] = [
 		description:
 			"You can find the card's ID in the URL when you're viewing it in the browser. https://app.pipefy.com/open-cards/[ID].",
 		type: 'string',
-		typeOptions: {
-			minValue: constants.cardIdLength,
-			maxValue: constants.cardIdLength,
-		},
 	},
 	{
 		displayName: 'Phase Name or ID',
@@ -69,7 +65,7 @@ const properties: INodeProperties[] = [
 				phaseId: [
 					{
 						_cnd: {
-							gt: constants.phaseIdLength,
+							exists: true,
 						},
 					},
 				],
@@ -103,7 +99,7 @@ const properties: INodeProperties[] = [
 				phaseId: [
 					{
 						_cnd: {
-							gt: constants.phaseIdLength,
+							exists: true,
 						},
 					},
 				],

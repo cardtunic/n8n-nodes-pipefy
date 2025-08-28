@@ -5,7 +5,7 @@ import {
 	INodeProperties,
 	updateDisplayOptions,
 } from 'n8n-workflow';
-import constants from '../../constants';
+
 import { graphQlRequest } from '../../transport';
 
 const properties: INodeProperties[] = [
@@ -18,10 +18,6 @@ const properties: INodeProperties[] = [
 		description:
 			"You can find the card's ID in the URL when you're viewing it in the browser. https://app.pipefy.com/open-cards/[ID].",
 		type: 'string',
-		typeOptions: {
-			minValue: constants.cardIdLength,
-			maxValue: constants.cardIdLength,
-		},
 	},
 	{
 		displayName: 'Relation Source',
@@ -72,7 +68,7 @@ const properties: INodeProperties[] = [
 				cardId: [
 					{
 						_cnd: {
-							gte: constants.cardIdLength,
+							exists: true,
 						},
 					},
 				],
@@ -97,7 +93,7 @@ const properties: INodeProperties[] = [
 				cardId: [
 					{
 						_cnd: {
-							gte: constants.cardIdLength,
+							exists: true,
 						},
 					},
 				],
@@ -122,14 +118,14 @@ const properties: INodeProperties[] = [
 				cardId: [
 					{
 						_cnd: {
-							gte: constants.cardIdLength,
+							exists: true,
 						},
 					},
 				],
 				phaseId: [
 					{
 						_cnd: {
-							gte: constants.phaseIdLength,
+							exists: true,
 						},
 					},
 				],
@@ -145,10 +141,6 @@ const properties: INodeProperties[] = [
 		description:
 			"You can find the card's ID in the URL when you're viewing it in the browser. https://app.pipefy.com/open-cards/[ID].",
 		type: 'string',
-		typeOptions: {
-			minValue: constants.cardIdLength,
-			maxValue: constants.cardIdLength,
-		},
 	},
 ];
 
