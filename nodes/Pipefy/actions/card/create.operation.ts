@@ -16,7 +16,8 @@ const properties: INodeProperties[] = [
 		type: 'options',
 		default: '',
 		required: true,
-		description: 'The ID of the organization to get the pipes from. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+		description:
+			'The ID of the organization to get the pipes from. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		typeOptions: {
 			loadOptionsMethod: 'getOrgs',
 		},
@@ -27,21 +28,11 @@ const properties: INodeProperties[] = [
 		type: 'options',
 		default: '',
 		required: true,
-		description: 'The ID of the pipe to get the cards from. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+		description:
+			'The ID of the pipe to get the cards from. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		typeOptions: {
 			loadOptionsMethod: 'getOrgPipes',
 			loadOptionsDependsOn: ['orgId'],
-		},
-		displayOptions: {
-			show: {
-				orgId: [
-					{
-						_cnd: {
-							gt: 0,
-						},
-					},
-				],
-			},
 		},
 	},
 	{
@@ -51,17 +42,6 @@ const properties: INodeProperties[] = [
 		default: '',
 		required: true,
 		hint: 'The title of the new card',
-		displayOptions: {
-			show: {
-				pipeId: [
-					{
-						_cnd: {
-							gt: 0,
-						},
-					},
-				],
-			},
-		},
 	},
 	{
 		displayName: 'Fields',

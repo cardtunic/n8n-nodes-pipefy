@@ -17,7 +17,8 @@ const properties: INodeProperties[] = [
 		default: '',
 		required: true,
 		hint: 'The ID of the card to update the fields of',
-		description: 'You can find the card\'s ID in the URL when you\'re viewing it in the browser. https://app.pipefy.com/open-cards/[ID].',
+		description:
+			"You can find the card's ID in the URL when you're viewing it in the browser. https://app.pipefy.com/open-cards/[ID].",
 		type: 'string',
 		typeOptions: {
 			minValue: constants.cardIdLength,
@@ -29,22 +30,12 @@ const properties: INodeProperties[] = [
 		name: 'phaseId',
 		default: '',
 		required: true,
-		description: 'The ID of the phase to move. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+		description:
+			'The ID of the phase to move. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 		type: 'options',
 		typeOptions: {
 			loadOptionsMethod: 'getPipePhases',
 			loadOptionsDependsOn: ['cardId'],
-		},
-		displayOptions: {
-			show: {
-				cardId: [
-					{
-						_cnd: {
-							gt: constants.cardIdLength,
-						},
-					},
-				],
-			},
 		},
 	},
 	{
@@ -62,12 +53,14 @@ const properties: INodeProperties[] = [
 			{
 				name: 'Add',
 				value: 'add',
-				description: 'Append values to existing list of values, compatible with field types that support lists like Attachments, Assignees, Labels, Connections and Checklists',
+				description:
+					'Append values to existing list of values, compatible with field types that support lists like Attachments, Assignees, Labels, Connections and Checklists',
 			},
 			{
 				name: 'Remove',
 				value: 'remove',
-				description: 'Remove values from the existing list of values, compatible with field types that support lists like Attachments, Assignees, Labels, Connections and Checklists',
+				description:
+					'Remove values from the existing list of values, compatible with field types that support lists like Attachments, Assignees, Labels, Connections and Checklists',
 			},
 		],
 		required: true,
