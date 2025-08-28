@@ -93,7 +93,10 @@ export async function getPipePhases(this: ILoadOptionsFunctions): Promise<INodeP
 		variables: { cardId },
 	})) as { card: { pipe: { phases: { id: string; name: string }[] } } };
 
-	return phases.map((phase) => ({ name: phase.name, value: phase.id }));
+	return [{ name: 'Start Form', id: 'startForm' }, ...phases].map((phase) => ({
+		name: phase.name,
+		value: phase.id,
+	}));
 }
 
 export async function getCardPipeLabels(

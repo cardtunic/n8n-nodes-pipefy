@@ -128,6 +128,7 @@ export async function getStartFormFields(
 }
 
 export async function getPhaseFields(this: ILoadOptionsFunctions): Promise<ResourceMapperFields> {
+	const cardId = this.getNodeParameter('cardId') as string;
 	const phaseId = this.getNodeParameter('phaseId') as string;
 	const updateOperation = this.getNodeParameter('updateOperation') as string;
 
@@ -139,11 +140,32 @@ export async function getPhaseFields(this: ILoadOptionsFunctions): Promise<Resou
 		'label_select',
 	] as PipefyFieldType[];
 
-	const {
-		phase: { fields },
-	} = (await graphQlRequest({
-		ctx: this,
-		query: `
+	let fields: Omit<PipefyField, 'required'>[] = [];
+
+	if (phaseId === 'startForm') {
+		const responseData = (await graphQlRequest({
+			ctx: this,
+			query: `
+      query getStartFormFields($cardId: ID!) {
+        card(id: $cardId) {
+          pipe {
+            start_form_fields {
+              id
+              label
+              type
+              options
+            }
+          }
+        }
+      }`,
+			variables: { cardId },
+		})) as { card: { pipe: { start_form_fields: Omit<PipefyField, 'required'>[] } } };
+
+		fields = responseData.card.pipe.start_form_fields;
+	} else {
+		const responseData = (await graphQlRequest({
+			ctx: this,
+			query: `
     query getPhaseFields($phaseId: ID!) {
       phase(id: $phaseId) {
         fields {
@@ -154,8 +176,11 @@ export async function getPhaseFields(this: ILoadOptionsFunctions): Promise<Resou
         }
       }
     }`,
-		variables: { phaseId },
-	})) as { phase: { fields: Omit<PipefyField, 'required'>[] } };
+			variables: { phaseId },
+		})) as { phase: { fields: Omit<PipefyField, 'required'>[] } };
+
+		fields = responseData.phase.fields;
+	}
 
 	return {
 		fields: fields
