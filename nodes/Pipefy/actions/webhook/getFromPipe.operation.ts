@@ -12,7 +12,8 @@ const properties: INodeProperties[] = [
 		displayName: 'Pipe Name or ID',
 		name: 'pipeId',
 		type: 'options',
-		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 		default: '',
 		required: true,
 		typeOptions: {
@@ -36,7 +37,7 @@ export async function execute(
 ): Promise<INodeExecutionData> {
 	const pipeId = this.getNodeParameter('pipeId', itemIndex) as string;
 
-	const responseData = await graphQlRequest({
+	const responseData = (await graphQlRequest({
 		ctx: this,
 		query: `
     query getPipeWebhooks($pipeId: ID!) {
@@ -54,7 +55,11 @@ export async function execute(
     }
     `,
 		variables: { pipeId },
-	});
+	})) as {
+		pipe: {
+			webhooks: any;
+		};
+	};
 
-	return { json: responseData };
+	return { json: { webhooks: responseData.pipe.webhooks } };
 }

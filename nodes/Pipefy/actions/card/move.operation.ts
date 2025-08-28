@@ -49,7 +49,7 @@ export async function execute(
 	const cardId = this.getNodeParameter('cardId', itemIndex) as string;
 	const phaseId = this.getNodeParameter('phaseId', itemIndex) as string;
 
-	const responseData = await graphQlRequest({
+	await graphQlRequest({
 		ctx: this,
 		query: `
     mutation moveCard($cardId: ID!, $phaseId: ID!) {
@@ -62,5 +62,5 @@ export async function execute(
 		variables: { cardId, phaseId },
 	});
 
-	return { json: responseData };
+	return { json: {} };
 }

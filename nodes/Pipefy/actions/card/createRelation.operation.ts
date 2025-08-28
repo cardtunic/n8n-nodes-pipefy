@@ -173,7 +173,7 @@ export async function execute(
 
 	const sourceId = relationSource === 'field' ? fieldId : pipeRelationId;
 
-	const responseData = await graphQlRequest({
+	const responseData = (await graphQlRequest({
 		ctx: this,
 		query: `
     mutation createCardRelation($parentId: ID!, $sourceId: ID!, $childId: ID!, $sourceType: String!) {
@@ -190,7 +190,7 @@ export async function execute(
 			childId,
 			sourceType: relationSource === 'field' ? 'Field' : 'PipeRelation',
 		},
-	});
+	})) as { createCardRelation: { cardRelation: { id: string } } };
 
-	return { json: responseData };
+	return { json: { relationId: responseData.createCardRelation.cardRelation.id } };
 }

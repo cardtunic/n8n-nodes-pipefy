@@ -52,5 +52,5 @@ export async function execute(
 	if (!responseData.deleteCard.success)
 		throw new NodeApiError(this.getNode(), { message: "Couldn't delete the card" });
 
-	return { json: responseData };
+	return { json: {} };
 }

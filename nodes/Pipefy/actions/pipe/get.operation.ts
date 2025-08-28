@@ -183,5 +183,5 @@ export async function execute(
 		variables: { pipeId },
 	});
 
-	return { json: responseData };
+	return { json: { ...(responseData.pipe as any) } };
 }

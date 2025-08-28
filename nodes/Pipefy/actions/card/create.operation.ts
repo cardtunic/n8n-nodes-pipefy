@@ -98,7 +98,7 @@ export async function execute(
 
 	const attributes = resourceMapperValueToPipefyAttributes(fields);
 
-	const responseData = await graphQlRequest({
+	const responseData = (await graphQlRequest({
 		ctx: this,
 		query: `
 	  mutation createCard($pipeId: ID!, $title: String!, $attributes: [FieldValueInput]) {
@@ -109,7 +109,7 @@ export async function execute(
 	    }
 	  }`,
 		variables: { pipeId, title, attributes },
-	});
+	})) as { createCard: { card: { id: string } } };
 
-	return { json: responseData };
+	return { json: { cardId: responseData.createCard.card.id } };
 }

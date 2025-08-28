@@ -176,5 +176,5 @@ export async function execute(
 		},
 	});
 
-	return { json: { cardId, title, dueDate, assignees, labels } };
+	return { json: {} };
 }

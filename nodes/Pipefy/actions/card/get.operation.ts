@@ -308,5 +308,5 @@ export async function execute(
 		variables: { cardId },
 	});
 
-	return { json: responseData };
+	return { json: { ...(responseData.card as any) } };
 }

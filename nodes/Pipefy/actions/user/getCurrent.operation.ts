@@ -7,5 +7,5 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
 		query: `{ me { id name email username } }`,
 	});
 
-	return { json: responseData };
+	return { json: { ...(responseData.me as any) } };
 }

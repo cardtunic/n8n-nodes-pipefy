@@ -85,5 +85,5 @@ export async function execute(
 
 	if (!success) throw new NodeApiError(this.getNode(), { message: 'Webhook could not be deleted' });
 
-	return { json: { success } };
+	return { json: {} };
 }

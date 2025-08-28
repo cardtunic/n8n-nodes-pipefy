@@ -62,7 +62,7 @@ export async function execute(
 
 	const orgId = this.getNodeParameter('orgId', itemIndex) as string;
 
-	const responseData = await graphQlRequest({
+	const responseData = (await graphQlRequest({
 		ctx: this,
 		query: `
       mutation createOrganizationWebhook(
@@ -99,7 +99,7 @@ export async function execute(
 			orgId,
 			url,
 		},
-	});
+	})) as { createOrganizationWebhook: { webhook: { id: string } } };
 
-	return { json: responseData };
+	return { json: { webhookId: responseData.createOrganizationWebhook.webhook.id } };
 }

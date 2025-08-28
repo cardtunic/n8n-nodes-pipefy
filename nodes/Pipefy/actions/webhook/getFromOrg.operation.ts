@@ -12,7 +12,8 @@ const properties: INodeProperties[] = [
 		displayName: 'Org Name or ID',
 		name: 'orgId',
 		type: 'options',
-		description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 		default: '',
 		required: true,
 		typeOptions: {
@@ -36,7 +37,7 @@ export async function execute(
 ): Promise<INodeExecutionData> {
 	const orgId = this.getNodeParameter('orgId', itemIndex) as string;
 
-	const responseData = await graphQlRequest({
+	const responseData = (await graphQlRequest({
 		ctx: this,
 		query: `
     query getOrgWebhooks($orgId: ID!) {
@@ -53,7 +54,11 @@ export async function execute(
       }
     }`,
 		variables: { orgId },
-	});
+	})) as {
+		organization: {
+			webhooks: any;
+		};
+	};
 
-	return { json: responseData };
+	return { json: { webhooks: responseData.organization.webhooks } };
 }

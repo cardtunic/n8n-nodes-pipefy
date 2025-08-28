@@ -167,5 +167,5 @@ export async function execute(
 			description: JSON.stringify(updateFieldsValues.userErrors, null, 2),
 		});
 
-	return { json: updateFieldsValues };
+	return { json: {} };
 }
