@@ -93,6 +93,12 @@ const properties: INodeProperties[] = [
 				default: '',
 			},
 			{
+				displayName: 'Label IDs',
+				name: 'labels',
+				type: 'json',
+				default: '[]',
+			},
+			{
 				displayName: 'Attachments',
 				name: 'attachments',
 				type: 'json',
@@ -119,9 +125,10 @@ export async function execute(
 	const title = this.getNodeParameter('title', itemIndex) as string;
 	const fields = this.getNodeParameter('fields', itemIndex) as ResourceMapperValue;
 
-	const { phaseId, attachments } = this.getNodeParameter('additionalFields', itemIndex) as {
+	const { phaseId, attachments, labels } = this.getNodeParameter('additionalFields', itemIndex) as {
 		phaseId?: string;
 		attachments?: string;
+		labels?: string;
 	};
 
 	const attributes = resourceMapperValueToPipefyAttributes(fields);
@@ -129,14 +136,14 @@ export async function execute(
 	const responseData = (await graphQlRequest({
 		ctx: this,
 		query: `
-	  mutation createCard($pipeId: ID!, $phaseId: ID, $attachments: [String], $title: String!, $attributes: [FieldValueInput]) {
-	    createCard(input: { pipe_id: $pipeId, phase_id: $phaseId, attachments: $attachments, title: $title, fields_attributes: $attributes }) {
+	  mutation createCard($pipeId: ID!, $phaseId: ID, $attachments: [String], $labels: [ID], $title: String!, $attributes: [FieldValueInput]) {
+	    createCard(input: { pipe_id: $pipeId, phase_id: $phaseId, attachments: $attachments, label_ids: $labels, title: $title, fields_attributes: $attributes }) {
 	      card {
 	        id
 	      }
 	    }
 	  }`,
-		variables: { pipeId, phaseId, title, attributes, attachments },
+		variables: { pipeId, phaseId, title, attributes, attachments, labels },
 	})) as { createCard: { card: { id: string } } };
 
 	return { json: { cardId: responseData.createCard.card.id } };
